@@ -1,0 +1,73 @@
+import type { Metadata } from "next";
+import { Icon } from "@/components/icons";
+import { PageBanner } from "@/components/page-banner";
+import { ProposalForm } from "@/components/proposal-form";
+import { site } from "@/content/site";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Request a proposal for managed services, outsourcing, cybersecurity, ERP, software, or AI.",
+};
+
+const next = [
+  {
+    title: "We review your request",
+    text: "We read what you sent and come back with any questions.",
+  },
+  {
+    title: "Discovery conversation",
+    text: "A short call to understand the problem and who it affects.",
+  },
+  {
+    title: "You receive a written plan",
+    text: "Scope, sequence, team, and what we would leave for later.",
+  },
+];
+
+export default function ContactPage() {
+  return (
+    <main>
+      <PageBanner eyebrow="Contact" title="Request a proposal">
+        <p>
+          Tell us what you need run, staffed, secured, or built. Your proposal
+          starts from that: the problem, the sequence, and what we would leave
+          for later.
+        </p>
+      </PageBanner>
+
+      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1.4fr_1fr] lg:gap-14">
+        <ProposalForm />
+        <aside className="space-y-6">
+          <div className="relative overflow-hidden rounded-2xl bg-navy-deep p-8 text-white">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_90%_at_100%_0%,rgba(20,184,177,0.3),transparent)]" />
+            <p className="relative text-sm text-white/60">Prefer to talk?</p>
+            <a
+              href={site.phoneHref}
+              className="relative mt-2 flex items-center gap-3 font-display text-2xl font-bold hover:text-teal"
+            >
+              <Icon name="phone" className="size-6 text-teal" />
+              {site.phone}
+            </a>
+          </div>
+          <div className="rounded-2xl border border-line bg-white p-8">
+            <p className="font-display text-lg font-bold text-navy-deep">What happens next</p>
+            <ol className="mt-6 space-y-6">
+              {next.map((item, index) => (
+                <li key={item.title} className="flex gap-4">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-navy/5 text-sm font-bold text-navy">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <p className="font-semibold text-navy-deep">{item.title}</p>
+                    <p className="mt-1 text-sm leading-6 text-muted">{item.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </aside>
+      </section>
+    </main>
+  );
+}
