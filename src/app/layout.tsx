@@ -16,9 +16,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000",
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL?.trim() || site.url),
   title: {
     default: `${site.name} · IT consultancy`,
     template: `%s · ${site.name}`,
@@ -36,7 +34,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    locale: "en_CA",
+    locale: "en_US",
     siteName: site.name,
     title: `${site.name} · IT consultancy`,
     description: site.description,

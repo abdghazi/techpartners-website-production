@@ -1,4 +1,4 @@
-import { services } from "@/content/site";
+import { services, site } from "@/content/site";
 import {
   proposalLimits,
   validateProposal,
@@ -33,6 +33,80 @@ function escapeHtml(value: string) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+async function sendEmail(apiKey: string, payload: Record<string, unknown>) {
+  return fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+}
+
+// Confirmation sent to the person who submitted the form. It deliberately
+// does not repeat their message, so the form cannot be used to relay
+// arbitrary text to someone else's inbox.
+async function sendAutoReply(
+  apiKey: string,
+  from: string,
+  replyTo: string,
+  fields: ProposalFields,
+) {
+  const firstName = fields.name.trim().split(/\s+/)[0].slice(0, 40);
+  const phonesText = site.phones
+    .map((phone) => `${phone.country}: ${phone.number}`)
+    .join("\n");
+  const phonesHtml = site.phones
+    .map((phone) => `${escapeHtml(phone.country)}: ${escapeHtml(phone.number)}`)
+    .join("<br />");
+
+  const text = [
+    `Hi ${firstName},`,
+    "",
+    `Thank you for contacting ${site.name}. We have received your proposal request and will review it shortly.`,
+    "",
+    "What happens next:",
+    "1. We review your request and come back with any questions.",
+    "2. A short discovery call to understand the problem and who it affects.",
+    "3. You receive a written plan: scope, sequence, team, and what we would leave for later.",
+    "",
+    "If you need to reach us sooner, reply to this email or call:",
+    phonesText,
+    "",
+    `The ${site.name} team`,
+  ].join("\n");
+
+  const html = `
+    <p>Hi ${escapeHtml(firstName)},</p>
+    <p>Thank you for contacting ${escapeHtml(site.name)}. We have received your proposal request and will review it shortly.</p>
+    <p><strong>What happens next</strong></p>
+    <ol>
+      <li>We review your request and come back with any questions.</li>
+      <li>A short discovery call to understand the problem and who it affects.</li>
+      <li>You receive a written plan: scope, sequence, team, and what we would leave for later.</li>
+    </ol>
+    <p>If you need to reach us sooner, reply to this email or call:<br />${phonesHtml}</p>
+    <p>The ${escapeHtml(site.name)} team</p>
+  `;
+
+  try {
+    const response = await sendEmail(apiKey, {
+      from,
+      to: [fields.email.trim()],
+      reply_to: replyTo,
+      subject: `We received your request – ${site.name}`,
+      text,
+      html,
+    });
+    if (!response.ok) {
+      console.error("Auto-reply error:", response.status, await response.text());
+    }
+  } catch (error) {
+    console.error("Auto-reply failed:", error);
+  }
 }
 
 export async function POST(request: Request) {
@@ -87,20 +161,13 @@ export async function POST(request: Request) {
   `;
 
   try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: fields.email.trim(),
-        subject,
-        text,
-        html,
-      }),
+    const response = await sendEmail(apiKey, {
+      from,
+      to: [to],
+      reply_to: fields.email.trim(),
+      subject,
+      text,
+      html,
     });
 
     if (!response.ok) {
@@ -117,6 +184,12 @@ export async function POST(request: Request) {
       { error: "We could not send that request. Please call us instead." },
       { status: 502 },
     );
+  }
+
+  // Resend's shared test sender cannot deliver to outside addresses, so only
+  // send the confirmation once a verified domain sender is configured.
+  if (!from.includes("@resend.dev")) {
+    await sendAutoReply(apiKey, from, to, fields);
   }
 
   return Response.json({ ok: true });

@@ -1,10 +1,33 @@
 export const site = {
   name: "TechPartners",
+  url: "https://techpartnersconsulting.com",
   tagline: "Better together in tech",
   description:
     "TechPartners is an IT consultancy for managed services, outsourcing, cybersecurity, ERP, and AI. Every engagement starts with a written plan, then one accountable team delivers and runs it.",
   phone: "+1 514 998 9496",
   phoneHref: "tel:+15149989496",
+  email: "marwan.ghazi@techpartnersconsulting.com",
+  emailHref: "mailto:marwan.ghazi@techpartnersconsulting.com",
+  phones: [
+    {
+      country: "Canada",
+      number: "+1 514 998 9496",
+      href: "tel:+15149989496",
+      whatsapp: null,
+    },
+    {
+      country: "Saudi Arabia",
+      number: "+966 59 244 5001",
+      href: "tel:+966592445001",
+      whatsapp: "https://wa.me/966592445001",
+    },
+    {
+      country: "Syria",
+      number: "+963 99 2222 199",
+      href: "tel:+963992222199",
+      whatsapp: "https://wa.me/963992222199",
+    },
+  ],
   year: 2026,
 };
 

@@ -44,13 +44,27 @@ export function SiteFooter() {
               {item.label}
             </FooterLink>
           ))}
+          {site.phones.map((phone) => (
+            <li key={phone.href}>
+              <a
+                href={phone.href}
+                className="inline-flex items-center gap-2 whitespace-nowrap text-white/80 transition hover:text-teal"
+              >
+                <Icon name="phone" className="size-4 shrink-0 text-teal" />
+                <span>
+                  {phone.number}
+                  <span className="ml-2 text-xs text-white/40">{phone.country}</span>
+                </span>
+              </a>
+            </li>
+          ))}
           <li>
             <a
-              href={site.phoneHref}
-              className="inline-flex items-center gap-2 text-white/80 transition hover:text-teal"
+              href={site.emailHref}
+              className="inline-flex items-center gap-2 break-all text-white/80 transition hover:text-teal"
             >
-              <Icon name="phone" className="size-4 text-teal" />
-              {site.phone}
+              <Icon name="mail" className="size-4 shrink-0 text-teal" />
+              {site.email}
             </a>
           </li>
         </FooterColumn>

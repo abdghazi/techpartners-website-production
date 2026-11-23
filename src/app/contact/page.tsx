@@ -42,12 +42,39 @@ export default function ContactPage() {
           <div className="relative overflow-hidden rounded-2xl bg-navy-deep p-8 text-white">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_90%_at_100%_0%,rgba(20,184,177,0.3),transparent)]" />
             <p className="relative text-sm text-white/60">Prefer to talk?</p>
+            <ul className="relative mt-4 space-y-4">
+              {site.phones.map((phone) => (
+                <li key={phone.href}>
+                  <p className="text-xs font-semibold tracking-[0.16em] text-white/50 uppercase">
+                    {phone.country}
+                  </p>
+                  <a
+                    href={phone.href}
+                    className="mt-1 flex items-center gap-3 font-display text-xl font-bold whitespace-nowrap hover:text-teal"
+                  >
+                    <Icon name="phone" className="size-5 shrink-0 text-teal" />
+                    {phone.number}
+                  </a>
+                  {phone.whatsapp ? (
+                    <a
+                      href={phone.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 ml-8 inline-flex items-center gap-1.5 text-sm font-semibold text-teal hover:text-white"
+                    >
+                      <Icon name="chat" className="size-4" />
+                      Message on WhatsApp
+                    </a>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
             <a
-              href={site.phoneHref}
-              className="relative mt-2 flex items-center gap-3 font-display text-2xl font-bold hover:text-teal"
+              href={site.emailHref}
+              className="relative mt-6 flex items-center gap-3 border-t border-white/10 pt-6 break-all text-base font-semibold text-white/90 hover:text-teal"
             >
-              <Icon name="phone" className="size-6 text-teal" />
-              {site.phone}
+              <Icon name="mail" className="size-5 shrink-0 text-teal" />
+              {site.email}
             </a>
           </div>
           <div className="rounded-2xl border border-line bg-white p-8">

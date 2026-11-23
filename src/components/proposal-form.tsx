@@ -74,8 +74,9 @@ export function ProposalForm() {
           Thanks, {submittedName}.
         </p>
         <p className="mt-3 leading-7 text-muted">
-          Your request is in. We will review it and get back to you to schedule
-          a short discovery conversation.
+          Your request is in, and a confirmation is on its way to your inbox.
+          We will review it and get back to you to schedule a short discovery
+          conversation.
         </p>
         <button
           type="button"
