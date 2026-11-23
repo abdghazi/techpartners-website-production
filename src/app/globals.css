@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Night view: the dark: variant follows the "dark" class on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #f5f8fb;
   --foreground: #0f1f33;
@@ -10,6 +13,24 @@
   --paper: #ffffff;
   --muted: #55657a;
   --line: #e1e8ef;
+  /* Cards and panels. */
+  --surface: #ffffff;
+  /* Always-dark sections (hero, process, call to action, footer). */
+  --ink: #061833;
+}
+
+/* Night view palette: the same names, swapped for dark backgrounds. */
+.dark {
+  color-scheme: dark;
+  --background: #0d192b;
+  --foreground: #dfe7f0;
+  --navy: #2563eb;
+  --navy-deep: #eef3f8;
+  --teal-deep: #2dd4bf;
+  --paper: #08121f;
+  --muted: #9fb0c3;
+  --line: #22324a;
+  --surface: #112038;
 }
 
 @theme inline {
@@ -22,6 +43,8 @@
   --color-paper: var(--paper);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
   --font-sans: var(--font-inter);
   --font-display: var(--font-jakarta);
 }
@@ -34,6 +57,32 @@ body {
   background: var(--paper);
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
+}
+
+/* Arabic pages: Arabic typeface everywhere, no letter spacing (it breaks
+   joined Arabic letters), and taller headings so marks above and below
+   the letters are not clipped. */
+[lang="ar"] {
+  --font-inter: var(--font-arabic);
+  --font-jakarta: var(--font-arabic);
+  font-family: var(--font-arabic), sans-serif;
+}
+
+[lang="ar"],
+[lang="ar"] * {
+  letter-spacing: normal !important;
+}
+
+[lang="ar"] :is(h1, h2, h3) {
+  line-height: 1.35 !important;
+}
+
+/* At night the navy button colour is too dark for text and icons, so
+   navy text uses a lighter blue. Low specificity keeps hover colours working. */
+@layer utilities {
+  :where(.dark) .text-navy {
+    color: #8ab4ff;
+  }
 }
 
 ::selection {

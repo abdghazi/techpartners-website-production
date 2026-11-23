@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { site } from "@/content/site";
+import { IBM_Plex_Sans_Arabic, Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { siteMetadata } from "@/content/metadata";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,37 +13,15 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
+// Used on the Arabic pages (see [lang="ar"] in globals.css).
+const arabic = IBM_Plex_Sans_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL?.trim() || site.url),
-  title: {
-    default: `${site.name} · IT consultancy`,
-    template: `%s · ${site.name}`,
-  },
-  description: site.description,
-  applicationName: site.name,
-  keywords: [
-    "IT consultancy",
-    "managed services",
-    "outsourcing",
-    "cybersecurity",
-    "ERP",
-    "AI solutions",
-    "TechPartners",
-  ],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    siteName: site.name,
-    title: `${site.name} · IT consultancy`,
-    description: site.description,
-    images: [{ url: "/brand/logo.png", width: 792, height: 494, alt: site.name }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${site.name} · IT consultancy`,
-    description: site.description,
-    images: ["/brand/logo.png"],
-  },
+  ...siteMetadata("en"),
   icons: {
     icon: [
       { url: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" },
@@ -55,17 +31,22 @@ export const metadata: Metadata = {
   },
 };
 
+// Runs before the page is drawn: use the visitor's saved choice, or their
+// device setting, so night view never flashes in day colours first.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jakarta.variable} h-full antialiased`}
+      // The theme script adds the "dark" class before React loads.
+      suppressHydrationWarning
+      className={`${inter.variable} ${jakarta.variable} ${arabic.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
-        <SiteHeader />
-        {children}
-        <SiteFooter />
-      </body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

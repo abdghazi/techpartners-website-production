@@ -3,11 +3,11 @@ import { Icon } from "@/components/icons";
 
 const buttonStyles = {
   primary:
-    "bg-navy text-white shadow-sm shadow-navy/20 hover:bg-navy-deep",
+    "bg-navy text-white shadow-sm shadow-navy/20 hover:bg-ink",
   accent:
-    "bg-teal text-navy-deep shadow-sm shadow-teal/30 hover:bg-white",
+    "bg-teal text-ink shadow-sm shadow-teal/30 hover:bg-white",
   outline:
-    "border border-line bg-white text-navy hover:border-navy/40 hover:bg-background",
+    "border border-line bg-surface text-navy hover:border-navy/40 hover:bg-background",
   outlineDark:
     "border border-white/25 text-white hover:border-white/60 hover:bg-white/5",
 };
@@ -32,7 +32,10 @@ export function ButtonLink({
     >
       {children}
       {arrow ? (
-        <Icon name="arrowRight" className="size-4 transition group-hover:translate-x-0.5" />
+        <Icon
+          name="arrowRight"
+          className="size-4 transition group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5"
+        />
       ) : null}
     </Link>
   );

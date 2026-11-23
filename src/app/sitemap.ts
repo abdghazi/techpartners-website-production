@@ -1,18 +1,32 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/content/site";
+import { pagePaths, type PageKey } from "@/content/metadata";
+import { localePath, locales, site } from "@/content/site";
 
-const pages = [
-  { path: "", priority: 1 },
-  { path: "/services", priority: 0.8 },
-  { path: "/approach", priority: 0.6 },
-  { path: "/about", priority: 0.6 },
-  { path: "/contact", priority: 0.8 },
-];
+const priority: Record<PageKey, number> = {
+  home: 1,
+  services: 0.8,
+  approach: 0.6,
+  about: 0.6,
+  contact: 0.8,
+};
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return pages.map((page) => ({
-    url: `${site.url}${page.path}`,
-    changeFrequency: "monthly",
-    priority: page.priority,
-  }));
+  const pages = Object.keys(pagePaths) as PageKey[];
+  return locales.flatMap((locale) =>
+    pages.map((page) => {
+      const path = pagePaths[page];
+      const url = (p: string) => `${site.url}${p === "/" ? "" : p}`;
+      return {
+        url: url(localePath(locale, path)),
+        changeFrequency: "monthly" as const,
+        priority: priority[page],
+        alternates: {
+          languages: {
+            en: url(path),
+            ar: url(localePath("ar", path)),
+          },
+        },
+      };
+    }),
+  );
 }

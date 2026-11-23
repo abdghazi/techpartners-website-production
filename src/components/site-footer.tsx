@@ -1,46 +1,42 @@
 import Link from "next/link";
 import { Brand } from "@/components/brand";
 import { Icon } from "@/components/icons";
-import { services, site } from "@/content/site";
+import { getContent } from "@/content";
+import { localePath, site, type Locale } from "@/content/site";
 
-const company = [
-  { href: "/approach", label: "Our approach" },
-  { href: "/about", label: "About us" },
-  { href: "/contact", label: "Request a proposal" },
-];
-
-export function SiteFooter() {
+export function SiteFooter({ locale }: { locale: Locale }) {
+  const t = getContent(locale);
+  const servicesHref = localePath(locale, "/services");
   return (
-    <footer className="mt-auto bg-navy-deep text-white">
+    <footer className="mt-auto bg-ink text-white">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 pt-16 pb-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <Brand tone="dark" />
+          <Brand tone="dark" locale={locale} />
           <p className="mt-5 max-w-xs text-sm leading-6 text-white/60">
-            IT consultancy for managed services, outsourcing, cybersecurity,
-            ERP, and AI. {site.tagline}.
+            {t.footer.blurb} {t.site.tagline}.
           </p>
         </div>
-        <FooterColumn title="Run and protect">
-          {services
+        <FooterColumn title={t.footer.runTitle}>
+          {t.services
             .filter((s) => s.group === "run")
             .map((s) => (
-              <FooterLink key={s.id} href={`/services#${s.id}`}>
+              <FooterLink key={s.id} href={`${servicesHref}#${s.id}`}>
                 {s.title}
               </FooterLink>
             ))}
         </FooterColumn>
-        <FooterColumn title="Build">
-          {services
+        <FooterColumn title={t.footer.buildTitle}>
+          {t.services
             .filter((s) => s.group === "build")
             .map((s) => (
-              <FooterLink key={s.id} href={`/services#${s.id}`}>
+              <FooterLink key={s.id} href={`${servicesHref}#${s.id}`}>
                 {s.title}
               </FooterLink>
             ))}
         </FooterColumn>
-        <FooterColumn title="Company">
-          {company.map((item) => (
-            <FooterLink key={item.href} href={item.href}>
+        <FooterColumn title={t.footer.companyTitle}>
+          {t.footer.company.map((item) => (
+            <FooterLink key={item.href} href={localePath(locale, item.href)}>
               {item.label}
             </FooterLink>
           ))}
@@ -52,8 +48,8 @@ export function SiteFooter() {
               >
                 <Icon name="phone" className="size-4 shrink-0 text-teal" />
                 <span>
-                  {phone.number}
-                  <span className="ml-2 text-xs text-white/40">{phone.country}</span>
+                  <span dir="ltr">{phone.number}</span>
+                  <span className="ms-2 text-xs text-white/40">{t.countries[phone.id]}</span>
                 </span>
               </a>
             </li>
@@ -64,7 +60,7 @@ export function SiteFooter() {
               className="inline-flex items-center gap-2 break-all text-white/80 transition hover:text-teal"
             >
               <Icon name="mail" className="size-4 shrink-0 text-teal" />
-              {site.email}
+              <span dir="ltr">{site.email}</span>
             </a>
           </li>
         </FooterColumn>
@@ -72,9 +68,9 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {site.year} {site.name}. All rights reserved.
+            © {site.year} {site.name}. {t.footer.rights}
           </p>
-          <p className="tracking-[0.16em] uppercase">{site.tagline}</p>
+          <p className="tracking-[0.16em] uppercase">{t.site.tagline}</p>
         </div>
       </div>
     </footer>
