@@ -456,6 +456,7 @@ export const en = {
       "You receive a written plan: scope, sequence, team, and what we would leave for later.",
     ],
     reach: "If you need to reach us sooner, reply to this email or call:",
+    follow: "Follow us on LinkedIn:",
     signoff: "The TechPartners team",
   },
   notFound: {

@@ -26,6 +26,15 @@ export function AboutView({ locale }: { locale: Locale }) {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
+          <a
+            href={site.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-5 py-3 text-sm font-semibold text-navy transition hover:border-navy/40 hover:bg-background"
+          >
+            <Icon name="linkedin" className="size-5" />
+            {t.common.linkedin}
+          </a>
         </div>
         <div className="relative">
           <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl bg-gradient-to-br from-navy/15 to-teal/25 rtl:-translate-x-4" />

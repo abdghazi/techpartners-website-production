@@ -8,10 +8,37 @@ import { localePath, site, type Locale } from "@/content/site";
 
 type SectionProps = { locale: Locale; t: Content };
 
+/** Tells search engines who the company is and that the LinkedIn page is ours. */
+function organizationJsonLd(locale: Locale, t: Content) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: site.name,
+    url: `${site.url}${locale === "en" ? "" : localePath(locale, "/")}`,
+    logo: `${site.url}/brand/logo.png`,
+    description: t.site.description,
+    email: site.email,
+    sameAs: [site.linkedin],
+    contactPoint: site.phones.map((phone) => ({
+      "@type": "ContactPoint",
+      telephone: phone.number.replaceAll(" ", ""),
+      contactType: "sales",
+      areaServed: phone.id.toUpperCase(),
+      availableLanguage: ["English", "Arabic"],
+    })),
+  };
+}
+
 export function HomeView({ locale }: { locale: Locale }) {
   const t = getContent(locale);
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationJsonLd(locale, t)).replace(/</g, "\\u003c"),
+        }}
+      />
       <Hero locale={locale} t={t} />
       <Pillars t={t} />
       <ServicesSection locale={locale} t={t} />

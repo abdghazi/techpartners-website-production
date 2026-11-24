@@ -90,6 +90,8 @@ async function sendAutoReply(
     reply.reach,
     phonesText,
     "",
+    `${reply.follow} ${site.linkedin}`,
+    "",
     reply.signoff,
   ].join("\n");
 
@@ -102,6 +104,7 @@ async function sendAutoReply(
         ${reply.next.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
       </ol>
       <p>${escapeHtml(reply.reach)}<br />${phonesHtml}</p>
+      <p>${escapeHtml(reply.follow)} <a href="${site.linkedin}">LinkedIn</a></p>
       <p>${escapeHtml(reply.signoff)}</p>
     </div>
   `;
