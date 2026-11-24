@@ -15,6 +15,15 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <p className="mt-5 max-w-xs text-sm leading-6 text-white/60">
             {t.footer.blurb} {t.site.tagline}.
           </p>
+          <a
+            href={site.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-teal"
+          >
+            <Icon name="linkedin" className="size-5 text-teal" />
+            {t.common.linkedin}
+          </a>
         </div>
         <FooterColumn title={t.footer.runTitle}>
           {t.services

@@ -40,6 +40,7 @@ export const site = {
   phoneHref: "tel:+963992222199",
   email: "marwan.ghazi@techpartnersconsulting.com",
   emailHref: "mailto:marwan.ghazi@techpartnersconsulting.com",
+  linkedin: "https://www.linkedin.com/company/techpartnersconsulting/",
   phones: [
     {
       id: "sy",

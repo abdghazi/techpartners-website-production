@@ -75,6 +75,7 @@ export const ar: Content = {
     requestProposal: "اطلب عرضاً",
     learnMore: "اعرف المزيد",
     whatsapp: "راسلنا عبر واتساب",
+    linkedin: "تابعنا على LinkedIn",
   },
   serviceGroups: [
     {

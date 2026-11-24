@@ -53,6 +53,15 @@ export function ContactView({ locale }: { locale: Locale }) {
               <Icon name="mail" className="size-5 shrink-0 text-teal" />
               <span dir="ltr">{site.email}</span>
             </a>
+            <a
+              href={site.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative mt-4 flex items-center gap-3 text-base font-semibold text-white/90 hover:text-teal"
+            >
+              <Icon name="linkedin" className="size-5 shrink-0 text-teal" />
+              {t.common.linkedin}
+            </a>
           </div>
           <div className="rounded-2xl border border-line bg-surface p-8">
             <p className="font-display text-lg font-bold text-navy-deep">{copy.nextTitle}</p>

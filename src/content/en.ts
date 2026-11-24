@@ -205,6 +205,7 @@ export const en = {
     requestProposal: "Request a proposal",
     learnMore: "Learn more",
     whatsapp: "Message on WhatsApp",
+    linkedin: "Follow us on LinkedIn",
   },
   serviceGroups,
   services,
