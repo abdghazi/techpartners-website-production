@@ -19,6 +19,13 @@ function organizationJsonLd(locale: Locale, t: Content) {
     description: t.site.description,
     email: site.email,
     sameAs: [site.linkedin],
+    founder: {
+      "@type": "Person",
+      name: t.aboutPage.founder.name,
+      jobTitle: t.aboutPage.founder.role,
+      image: `${site.url}${site.founderPhoto}`,
+      sameAs: [site.founderLinkedin],
+    },
     contactPoint: site.phones.map((phone) => ({
       "@type": "ContactPoint",
       telephone: phone.number.replaceAll(" ", ""),
@@ -212,7 +219,9 @@ function ServicesSection({ locale, t }: SectionProps) {
               </div>
               <div
                 className={`mt-6 grid gap-5 sm:grid-cols-2 ${
-                  group.id === "run" ? "lg:grid-cols-4" : "lg:grid-cols-3"
+                  t.services.filter((service) => service.group === group.id).length % 4 === 0
+                    ? "lg:grid-cols-4"
+                    : "lg:grid-cols-3"
                 }`}
               >
                 {t.services

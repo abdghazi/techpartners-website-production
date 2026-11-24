@@ -11,7 +11,8 @@ export type IconName =
   | "layers"
   | "sparkles"
   | "code"
-  | "workflow";
+  | "workflow"
+  | "signal";
 
 export type Service = {
   id: string;
@@ -41,6 +42,8 @@ export const site = {
   email: "marwan.ghazi@techpartnersconsulting.com",
   emailHref: "mailto:marwan.ghazi@techpartnersconsulting.com",
   linkedin: "https://www.linkedin.com/company/techpartnersconsulting/",
+  founderLinkedin: "https://www.linkedin.com/in/marwan-ghazi-0762b0b/",
+  founderPhoto: "/team/marwan-ghazi.jpg",
   phones: [
     {
       id: "sy",

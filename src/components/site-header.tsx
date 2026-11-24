@@ -84,6 +84,16 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           {languageSwitch(
             "rounded-md border border-line px-3 py-2 text-sm font-semibold text-navy transition hover:border-navy/40",
           )}
+          <a
+            href={site.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t.common.linkedin}
+            title={t.common.linkedin}
+            className="flex size-10 items-center justify-center rounded-lg border border-line text-navy transition hover:border-navy/40"
+          >
+            <Icon name="linkedin" className="size-5" />
+          </a>
           <Link
             href={contactHref}
             className="rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-navy/20 transition hover:bg-ink"
@@ -140,6 +150,15 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           >
             <Icon name="phone" className="size-4" />
             <span dir="ltr">{site.phone}</span>
+          </a>
+          <a
+            href={site.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 py-2 text-sm font-medium text-navy"
+          >
+            <Icon name="linkedin" className="size-4" />
+            {t.common.linkedin}
           </a>
         </nav>
       ) : null}

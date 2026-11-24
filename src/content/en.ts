@@ -81,6 +81,23 @@ const services: Service[] = [
     ],
   },
   {
+    id: "telecom",
+    title: "IT & telecom service management",
+    kicker: "Connect",
+    group: "run",
+    icon: "signal",
+    summary:
+      "ITSM, service operations, performance management, and operational excellence for IT and telecom.",
+    problem:
+      "Networks and platforms grow faster than the processes around them, so the same incidents return and nobody can say which services are healthy.",
+    deliver: [
+      "ITSM processes for incidents, problems, changes, and service requests",
+      "Service operations and NOC practices with clear ownership and escalation",
+      "Performance and service-level reporting across network and IT",
+      "BSS and OSS advisory for billing, provisioning, and service assurance",
+    ],
+  },
+  {
     id: "software",
     title: "Custom software",
     kicker: "Engineer",
@@ -134,7 +151,7 @@ export const en = {
   site: {
     tagline: "Better together in tech",
     description:
-      "TechPartners is an IT consultancy for managed services, outsourcing, cybersecurity, ERP, and AI. Every engagement starts with a written plan, then one accountable team delivers and runs it.",
+      "TechPartners is an IT consultancy for managed services, outsourcing, cybersecurity, IT and telecom service management, ERP, and AI. Every engagement starts with a written plan, then one accountable team delivers and runs it.",
   },
   meta: {
     homeTitle: "TechPartners · IT consultancy",
@@ -145,6 +162,8 @@ export const en = {
       "outsourcing",
       "cybersecurity",
       "ERP",
+      "telecom service management",
+      "ITSM",
       "AI solutions",
       "TechPartners",
     ],
@@ -152,7 +171,7 @@ export const en = {
       services: {
         title: "Services",
         description:
-          "Managed services, IT outsourcing, cybersecurity, ERP, custom software, and AI. Each engagement starts with a written plan.",
+          "Managed services, IT outsourcing, cybersecurity, IT and telecom service management, ERP, custom software, and AI. Each engagement starts with a written plan.",
       },
       approach: {
         title: "Approach",
@@ -162,12 +181,12 @@ export const en = {
       about: {
         title: "About",
         description:
-          "TechPartners is an IT consultancy for managed services, outsourcing, cybersecurity, ERP, and AI.",
+          "TechPartners is an IT consultancy for managed services, outsourcing, cybersecurity, IT and telecom service management, ERP, and AI.",
       },
       contact: {
         title: "Contact",
         description:
-          "Request a proposal for managed services, outsourcing, cybersecurity, ERP, software, or AI.",
+          "Request a proposal for managed services, outsourcing, cybersecurity, telecom service management, ERP, software, or AI.",
       },
     },
   },
@@ -190,7 +209,7 @@ export const en = {
   },
   footer: {
     blurb:
-      "IT consultancy for managed services, outsourcing, cybersecurity, ERP, and AI.",
+      "IT consultancy for managed services, outsourcing, cybersecurity, telecom, ERP, and AI.",
     runTitle: "Run and protect",
     buildTitle: "Build",
     companyTitle: "Company",
@@ -387,7 +406,29 @@ export const en = {
     operateEyebrow: "How we operate",
     operateTitle: "Four commitments behind every engagement.",
     whatEyebrow: "What we do",
-    whatTitle: "Seven services, one accountable team.",
+    whatTitle: "Eight services, one accountable team.",
+    founder: {
+      eyebrow: "Leadership",
+      title: "Meet our founder",
+      name: "Marwan Ghazi",
+      role: "Founder & CEO",
+      photoAlt: "Marwan Ghazi, founder and CEO of TechPartners",
+      paragraphs: [
+        "Marwan founded TechPartners after more than three decades in IT and telecom, much of it leading delivery for large operators and enterprises in Saudi Arabia.",
+        "At IBM he was a Delivery Project Executive, running IT operations for major accounts and owning service delivery, SLAs, cost, and the client relationship. At Huawei he led BSS work, guiding operators across billing, provisioning, and service fulfillment, and shaping tenders with technical designs and total-cost-of-ownership models.",
+        "He brings the same discipline to every TechPartners engagement: a clear plan, agreed service levels, and one team that answers for the result.",
+      ],
+      careerTitle: "Experience",
+      career: [
+        { role: "Director of Management Services", org: "CSG" },
+        { role: "Delivery Project Executive", org: "IBM" },
+        { role: "BSS Director", org: "Huawei" },
+        { role: "Principal Consultant", org: "International Turnkey Systems" },
+      ],
+      educationTitle: "Education",
+      education: "Damascus University",
+      linkedin: "View Marwan's LinkedIn profile",
+    },
   },
   contactPage: {
     eyebrow: "Contact",
