@@ -306,32 +306,13 @@ export const en = {
   },
   home: {
     hero: {
-      badge: "IT consultancy",
+      badge: "IT & telecom consultancy",
       badgeDetail: "· Managed services · Security · ERP · AI",
       titleStart: "Technology partners who plan it, build it, and",
       titleHighlight: "keep it running.",
       text: "TechPartners runs, protects, and builds the systems your business depends on. Every engagement starts with a written plan you approve. Then one accountable team delivers it.",
       explore: "Explore services",
       checks: ["Written plan first", "One accountable team", "Support after launch"],
-    },
-    visual: {
-      label: "Example engagement",
-      title: "ERP rollout · Phase 3",
-      status: "On track",
-      phases: [
-        { name: "Discover", status: "Complete", value: 100 },
-        { name: "Plan", status: "Approved", value: 100 },
-        { name: "Deliver", status: "In progress", value: 64 },
-        { name: "Support", status: "Scheduled", value: 0 },
-      ],
-      stats: [
-        { label: "Phases", value: "04" },
-        { label: "Live now", value: "03" },
-        { label: "Next", value: "01" },
-      ],
-      securityLabel: "Security monitoring",
-      securityStatus: "All systems healthy",
-      approved: "Proposal approved",
     },
     pillars: [
       { title: "Run", text: "Managed services and outsourcing" },
@@ -414,7 +395,7 @@ export const en = {
       role: "Founder & CEO",
       photoAlt: "Marwan Ghazi, founder and CEO of TechPartners",
       paragraphs: [
-        "Marwan founded TechPartners after more than three decades in IT and telecom, much of it leading delivery for large operators and enterprises in Saudi Arabia.",
+        "Marwan founded TechPartners after more than three decades in IT and telecom, much of it leading delivery for large operators and enterprises in Saudi Arabia and Africa.",
         "At IBM he was a Delivery Project Executive, running IT operations for major accounts and owning service delivery, SLAs, cost, and the client relationship. At Huawei he led BSS work, guiding operators across billing, provisioning, and service fulfillment, and shaping tenders with technical designs and total-cost-of-ownership models.",
         "He brings the same discipline to every TechPartners engagement: a clear plan, agreed service levels, and one team that answers for the result.",
       ],

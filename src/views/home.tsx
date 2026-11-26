@@ -64,7 +64,7 @@ function Hero({ locale, t }: SectionProps) {
     <section className="relative overflow-hidden bg-ink text-white">
       <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_65%_at_85%_0%,rgba(20,184,177,0.28),transparent),radial-gradient(50%_70%_at_0%_100%,rgba(11,61,134,0.85),transparent)]" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-6 pt-20 pb-24 lg:grid-cols-[1.1fr_0.9fr] lg:pt-28 lg:pb-32">
+      <div className="relative mx-auto max-w-4xl px-6 pt-24 pb-28 text-center lg:pt-32 lg:pb-36">
         <div className="animate-fade-up">
           <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/80">
             <span className="size-1.5 rounded-full bg-teal" />
@@ -77,8 +77,8 @@ function Hero({ locale, t }: SectionProps) {
               {hero.titleHighlight}
             </span>
           </h1>
-          <p className="mt-7 max-w-xl text-lg leading-8 text-white/70">{hero.text}</p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-white/70">{hero.text}</p>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <ButtonLink href={localePath(locale, "/contact")} variant="accent" arrow>
               {t.common.requestProposal}
             </ButtonLink>
@@ -86,7 +86,7 @@ function Hero({ locale, t }: SectionProps) {
               {hero.explore}
             </ButtonLink>
           </div>
-          <ul className="mt-12 grid gap-3 text-sm text-white/75 sm:grid-cols-3">
+          <ul className="mt-12 flex flex-col items-center gap-3 text-sm text-white/75 sm:flex-row sm:justify-center sm:gap-8">
             {hero.checks.map((check) => (
               <CheckItem key={check} tone="dark">
                 {check}
@@ -94,78 +94,8 @@ function Hero({ locale, t }: SectionProps) {
             ))}
           </ul>
         </div>
-        <HeroVisual t={t} />
       </div>
     </section>
-  );
-}
-
-function HeroVisual({ t }: { t: Content }) {
-  const visual = t.home.visual;
-  return (
-    <div
-      className="animate-fade-up relative mx-auto w-full max-w-md lg:max-w-none"
-      style={{ animationDelay: "120ms" }}
-      aria-hidden="true"
-    >
-      <div className="animate-float rounded-2xl border border-white/10 bg-white/[0.06] p-2 shadow-2xl shadow-black/40 backdrop-blur-xl">
-        <div className="rounded-xl bg-surface p-6 text-navy-deep">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="text-xs font-medium text-muted">{visual.label}</p>
-              <p className="mt-1 font-display text-lg font-bold">{visual.title}</p>
-            </div>
-            <span className="rounded-full bg-teal/15 px-2.5 py-1 text-xs font-semibold whitespace-nowrap text-teal-deep">
-              {visual.status}
-            </span>
-          </div>
-          <ul className="mt-6 space-y-4">
-            {visual.phases.map((phase) => (
-              <li key={phase.name}>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium">{phase.name}</span>
-                  <span className="text-xs text-muted">{phase.status}</span>
-                </div>
-                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-line">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-navy to-teal rtl:bg-gradient-to-l"
-                    style={{ width: `${phase.value}%` }}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6 grid grid-cols-3 gap-3 border-t border-line pt-5 text-center">
-            {visual.stats.map((stat) => (
-              <div key={stat.label}>
-                <p className="font-display text-xl font-bold text-navy">{stat.value}</p>
-                <p className="mt-0.5 text-[11px] text-muted">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="absolute -bottom-16 -start-8 hidden w-60 rounded-xl border border-white/10 bg-ink/90 p-4 shadow-xl backdrop-blur sm:block">
-        <div className="flex items-center gap-3">
-          <span className="flex size-9 items-center justify-center rounded-lg bg-teal/15 text-teal">
-            <Icon name="shield" className="size-5" />
-          </span>
-          <div>
-            <p className="text-xs text-white/60">{visual.securityLabel}</p>
-            <p className="text-sm font-semibold text-white">{visual.securityStatus}</p>
-          </div>
-        </div>
-      </div>
-      <div className="absolute -end-4 -top-6 hidden rounded-xl border border-white/10 bg-ink/90 px-4 py-3 shadow-xl backdrop-blur sm:block">
-        <div className="flex items-center gap-2 text-sm font-semibold text-white">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-teal opacity-60" />
-            <span className="relative inline-flex size-2 rounded-full bg-teal" />
-          </span>
-          {visual.approved}
-        </div>
-      </div>
-    </div>
   );
 }
 
